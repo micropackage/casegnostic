@@ -1,0 +1,30 @@
+{
+    "name": "micropackage/casegnostic",
+    "description": "Casegnostic - access properties and methods both snake_case and camelCase",
+	"scripts": {
+		"phpcs": "phpcs",
+	  	"phpcbf": "phpcbf",
+		"phpstan": "phpstan analyze"
+	},
+    "require": {
+        "php": ">=5.6"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.9",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+        "pestphp/pest": "^1.22",
+        "szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^0.6.1"
+    },
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Micropackage\\Casegnostic\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
