@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="BracketSpace Coding Style">
-	<config name="minimum_supported_wp_version" value="5.7"/>
-
-	<rule ref="PSR12NeutronRuleset">
+§§	<rule ref="PSR12NeutronRuleset">
 		<!-- NeutronStandard bug -->
 		<exclude name="NeutronStandard.Functions.TypeHint.NoReturnType"/>
 		<!-- https://github.com/sirbrillig/phpcs-import-detection/issues/45 -->
@@ -20,6 +18,10 @@
 		<exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores"/>
 
 		<exclude name="NeutronStandard.Functions.LongFunction.LongFunction"/>
+
+		<exclude name="NeutronStandard.MagicMethods.DisallowMagicGet.MagicGet"/>
+
+		<exclude name="NeutronStandard.MagicMethods.RiskyMagicMethod.RiskyMagicMethod"/>
 	</rule>
 
 	<rule ref="PSR12">
