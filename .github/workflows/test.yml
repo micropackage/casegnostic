@@ -45,7 +45,5 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install Composer dependencies
         run: composer install --no-progress
-      - name: Install Composer build dependencies
-        run: composer bin build install --no-progress
       - name: Analyze
         run: composer phpstan
