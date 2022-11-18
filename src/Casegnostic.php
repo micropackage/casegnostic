@@ -59,7 +59,7 @@ trait Casegnostic
             }
         }
 
-        throw new \http\Exception\BadMethodCallException('method does not exist');
+        throw new \BadMethodCallException('method does not exist');
     }
 
     /**
@@ -82,6 +82,6 @@ trait Casegnostic
             }
         }
 
-        throw new \http\Exception\BadMethodCallException('static method does not exist');
+        throw new \BadMethodCallException('static method does not exist');
     }
 }
