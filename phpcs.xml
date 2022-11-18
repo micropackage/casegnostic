@@ -18,7 +18,7 @@
 		<exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores"/>
 
 		<exclude name="NeutronStandard.Functions.LongFunction.LongFunction"/>
-
+		<exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen"/>
 		<exclude name="NeutronStandard.MagicMethods.DisallowMagicGet.MagicGet"/>
 
 		<exclude name="NeutronStandard.MagicMethods.RiskyMagicMethod.RiskyMagicMethod"/>
@@ -28,6 +28,15 @@
 	<rule ref="PSR12">
 		<exclude name="PSR12.Files.FileHeader" />
 		<exclude name="PSR12.Files.OpenTag" />
+		<exclude name="Generic.WhiteSpace.DisallowTabIndent" />
+	</rule>
+
+	<!-- Use tabs instead of spaces for indentation -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent" />
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="tabIndent" value="true" />
+		</properties>
 	</rule>
 
 	<rule ref="Squiz.PHP.DiscouragedFunctions">
