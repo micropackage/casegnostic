@@ -19,10 +19,10 @@ trait Casegnostic
 {
     /**
      * @param string $name
-     * @return mixed
+     * @return mixed|void
      * @throws \Exception
      */
-    public function __get( string $name)
+    public function __get(string $name)
     {
         if (CaseHelper::isSnake($name)) {
             if (property_exists($this, CaseHelper::toCamel($name))) {
@@ -35,8 +35,6 @@ trait Casegnostic
                 return $this->{CaseHelper::toSnake($name)};
             }
         }
-
-        throw new \Exception('property does not exist');
     }
 
     /**

@@ -22,9 +22,9 @@ $object = new class {
 	public static function camelCaseStaticMethodTwoArg(string $a, string $b): string { return $a . $b; }
 };
 
-test('call to undefined property throws exception', function() use ($object) {
-	return $object->undefined_property;
-})->throws(Exception::class);
+test('call to undefined property is falsy', function() use ($object) {
+	expect($object->undefined_property)->toBeFalsy();
+});
 
 test('call to undefined method throws exception', function() use ($object) {
 	return $object->undefinedMethod();
