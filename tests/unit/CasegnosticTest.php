@@ -28,11 +28,11 @@ test('call to undefined property throws exception', function() use ($object) {
 
 test('call to undefined method throws exception', function() use ($object) {
 	return $object->undefinedMethod();
-})->throws(\http\Exception\BadMethodCallException::class);
+})->throws(\BadMethodCallException::class);
 
 test('call to undefined static method throws exception', function() use ($object) {
 	return $object::undefinedStaticMethod();
-})->throws(\http\Exception\BadMethodCallException::class);
+})->throws(\BadMethodCallException::class);
 
 test('test if different cases fit each other', function($first, $second) {
 	expect($first)->toBe($second);
