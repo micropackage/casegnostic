@@ -21,7 +21,7 @@ class CaseHelper
      * @param string $name
      * @return false|int
      */
-    public static function isSnake(string $name)
+    public static function isSnake( string $name)
     {
         return preg_match('/^[a-zA-Z0-9]+?(_[a-zA-Z0-9]+)+$/', $name);
     }
@@ -30,7 +30,7 @@ class CaseHelper
      * @param string $name
      * @return false|int
      */
-    public static function isCamel(string $name)
+    public static function isCamel( string $name)
     {
         return preg_match('/^[a-z]+([A-Z][a-z]+)+$/', $name);
     }
@@ -40,7 +40,7 @@ class CaseHelper
      * @return string
      * @throws \Exception
      */
-    public static function toSnake(string $name)
+    public static function toSnake( string $name)
     {
         if (self::isCamel($name)) {
             return strtolower(preg_replace('/(.)(?=[A-Z])/u', '$1_', $name) ?? '');
@@ -54,12 +54,12 @@ class CaseHelper
      * @return string
      * @throws \Exception
      */
-    public static function toCamel(string $name)
+    public static function toCamel( string $name)
     {
         if (self::isSnake($name)) {
             return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $name))));
         }
 
-		throw new \InvalidArgumentException("'$name' is not in snake_case format");
-	}
+        throw new \InvalidArgumentException("'$name' is not in snake_case format");
+    }
 }
