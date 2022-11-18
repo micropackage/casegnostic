@@ -4,4 +4,4 @@ parameters:
 		- src/
 		- tests/CasegnosticTraitTest.php
 	excludePaths:
-		-tests/unit
+		- tests/unit
