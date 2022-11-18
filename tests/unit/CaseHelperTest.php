@@ -2,71 +2,76 @@
 
 use \Micropackage\Casegnostic\Helpers\CaseHelper;
 
-$snakeCaseValues = [
+dataset('snakeCaseValues', [
 	'snake_case',
 	'snake_case_case',
 	'snake_case_case_case',
 	'snake_Case',
 	'Snake_Case',
 	'snake_caseCase'
-];
+]);
 
-$camelCaseValues = [
+dataset('camelCaseValues', [
 	'camelCase',
 	'camelCaseCase',
 	'camelCaseCaseCase',
-];
+]);
 
-$falseValues = [
+dataset('falseValues', [
 	'_whateverCase',
 	'_whatever_case',
 	'WhateverCase_',
-];
+	'PascalCase',
+]);
 
-test("isSnake returns true for snake case values", function() use ($snakeCaseValues) {
-	foreach($snakeCaseValues as $value) {
-		expect(CaseHelper::isSnake($value))->toBeTruthy();
-	}
-});
+test('isSnake returns true', function($snake_case_value) {
+	expect(CaseHelper::isSnake($snake_case_value))->toBeTruthy();
+})->with('snakeCaseValues');
 
-test("isSnake returns false for camel case values and false values", function() use ($camelCaseValues, $falseValues) {
-	foreach(array_merge($camelCaseValues, $falseValues) as $value) {
-		expect(CaseHelper::isSnake($value))->toBeFalsy();
-	}
-});
+test('isSnake returns false for camel case values', function($camelCaseValue) {
+	expect(CaseHelper::isSnake($camelCaseValue))->toBeFalsy();
+})->with('camelCaseValues');
 
-test("isCamel returns true for camel case values", function() use ($camelCaseValues) {
-	foreach($camelCaseValues as $value) {
-		expect(CaseHelper::isCamel($value))->toBeTruthy();
-	}
-});
+test('isSnake returns false for falsy values', function($falsy_value) {
+	expect(CaseHelper::isSnake($falsy_value))->toBeFalsy();
+})->with('falseValues');
 
-test("isCamel returns false for snake case values and false values", function() use ($snakeCaseValues, $falseValues) {
-	foreach(array_merge($snakeCaseValues, $falseValues) as $value) {
-		expect(CaseHelper::isCamel($value))->toBeFalsy();
-	}
-});
+test("isCamel returns true for camelCase values", function($camelCaseValue) {
+	expect(CaseHelper::isCamel($camelCaseValue))->toBeTruthy();
+})->with('camelCaseValues');
 
-test("toSnake returns all camel case values to snake case", function() use ($camelCaseValues) {
-	foreach($camelCaseValues as $value) {
-		expect(CaseHelper::isSnake(CaseHelper::toSnake($value)))->toBeTruthy();
-	}
-});
+test('isCamel returns false for snake_case values', function($snake_case_value) {
+	expect(CaseHelper::isCamel($snake_case_value))->toBeFalsy();
+})->with('snakeCaseValues');
 
-test("toCamel returns all snake case values to camel case", function() use ($snakeCaseValues) {
-	foreach($snakeCaseValues as $value) {
-		expect(CaseHelper::isCamel(CaseHelper::toCamel($value)))->toBeTruthy();
-	}
-});
+test('isCamel returns false for falsy values', function($falsy_value) {
+	expect(CaseHelper::isCamel($falsy_value))->toBeFalsy();
+})->with('falseValues');
 
-test("toSnake throws exception for camel case and false values", function() use ($snakeCaseValues, $falseValues) {
-	foreach(array_merge($snakeCaseValues, $falseValues) as $value) {
-		CaseHelper::isSnake(CaseHelper::toSnake($value));
-	}
-})->throws(Exception::class);
+test('toSnake returns all camel case values to snake case', function($camelCaseValue) {
+	expect(CaseHelper::isSnake(CaseHelper::toSnake($camelCaseValue)))->toBeTruthy();
+})->with('camelCaseValues');
 
-test("toCamel throws exception for snake case and false values", function() use ($camelCaseValues, $falseValues) {
-	foreach(array_merge($camelCaseValues, $falseValues) as $value) {
-		CaseHelper::isCamel(CaseHelper::toCamel($value));
-	}
-})->throws(Exception::class);
+test("toCamel returns all snake case values to camel case", function($snakeCaseValue) {
+	expect(CaseHelper::isCamel(CaseHelper::toCamel($snakeCaseValue)))->toBeTruthy();
+})->with('snakeCaseValues');
+
+test("toSnake throws exception for snake_case value", function($snakeCaseValue) {
+		CaseHelper::isSnake(CaseHelper::toSnake($snakeCaseValue));
+})->throws(InvalidArgumentException::class)
+	->with('snakeCaseValues');
+
+test("toSnake throws exception for false value", function($falseValue) {
+	CaseHelper::isSnake(CaseHelper::toSnake($falseValue));
+})->throws(InvalidArgumentException::class)
+	->with('falseValues');
+
+test("toCamel throws exception for snake_case value", function($camelCaseValue) {
+	CaseHelper::isCamel(CaseHelper::toCamel($camelCaseValue));
+})->throws(InvalidArgumentException::class)
+	->with('camelCaseValues');
+
+test("toCamel throws exception for false value", function($falseValue) {
+	CaseHelper::isCamel(CaseHelper::toCamel($falseValue));
+})->throws(InvalidArgumentException::class)
+	->with('falseValues');
