@@ -22,10 +22,6 @@ $object = new class {
 	public static function camelCaseStaticMethodTwoArg(string $a, string $b): string { return $a . $b; }
 };
 
-test('call to undefined property is falsy', function() use ($object) {
-	expect($object->undefined_property)->toBeFalsy();
-});
-
 test('call to undefined method throws exception', function() use ($object) {
 	return $object->undefinedMethod();
 })->throws(\BadMethodCallException::class);
@@ -34,9 +30,34 @@ test('call to undefined static method throws exception', function() use ($object
 	return $object::undefinedStaticMethod();
 })->throws(\BadMethodCallException::class);
 
-test('test if different cases fit each other', function($first, $second) {
-	expect($first)->toBe($second);
+test('unset ', function($property) {
+	unset($property);
+	expect(isset($property))->toBeFalsy();
 })->with([
+	 'snake_case property by camelCase' => $object->snakeCaseProperty,
+	 'camelCase property by snake_case' => $object->camel_case_property,
+]);
+
+test('isset ', function($property, $bool) {
+	expect(isset($property))->toBe($bool);
+})->with([
+	  'snake_case property by camelCase' => [$object->snakeCaseProperty, true],
+	  'camelCase property by snake_case' => [$object->camel_case_property, true],
+	  'undefined property to be false' => [$object->undefnied_property, false],
+]);
+
+test('set ', function($property, $value) use ($object) {
+	$object->{$property} = $value;
+	expect($object->{$property})->toBe($value);
+})->with([
+	 'snake_case property by camelCase' => ['snakeCaseProperty', 5],
+	 'camelCase property by snake_case' => ['camel_case_property', 5],
+]);
+
+test('get ', function($first, $second) {
+	expect($first)->toBe($second);
+}
+)->with([
 	'snake_case property as camelcase' => [$object->snakeCaseProperty, $object->snake_case_property],
 	'camelCase property as snake_case' => [$object->camel_case_property, $object->camelCaseProperty],
 	'snake_case method as camelCase' => [$object->snakeCaseMethod(), $object->snake_case_method()],
