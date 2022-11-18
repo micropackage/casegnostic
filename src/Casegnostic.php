@@ -72,13 +72,13 @@ trait Casegnostic
     {
         if (CaseHelper::isSnake($name)) {
             if (method_exists(self::class, CaseHelper::toCamel($name))) {
-                return self::{CaseHelper::toCamel($name)}(...$arguments);
+                return static::{CaseHelper::toCamel($name)}(...$arguments);
             }
         }
 
         if (CaseHelper::isCamel($name)) {
             if (method_exists(self::class, CaseHelper::toSnake($name))) {
-                return self::{CaseHelper::toSnake($name)}(...$arguments);
+                return static::{CaseHelper::toSnake($name)}(...$arguments);
             }
         }
 
