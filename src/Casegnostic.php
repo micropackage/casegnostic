@@ -84,7 +84,7 @@ trait Casegnostic
 			}
 		}
 
-		throw new \BadMethodCallException('method does not exist');
+		throw new \BadMethodCallException("Method \"{$name}\" does not exist.");
 	}
 
 	/**
@@ -107,7 +107,8 @@ trait Casegnostic
 			}
 		}
 
-		throw new \BadMethodCallException('static method does not exist');
+		throw new \BadMethodCallException("Static method \"{$name}\" does not exist.");
+
 	}
 
 	/**
@@ -147,6 +148,6 @@ trait Casegnostic
 			}
 		}
 
-		throw new \InvalidArgumentException("Can't find value to unset");
+		throw new \InvalidArgumentException("Can't find value \"{$name}\" to unset.");
 	}
 }
