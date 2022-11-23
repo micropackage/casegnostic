@@ -18,6 +18,11 @@ namespace Micropackage\Casegnostic\Helpers;
 class CaseHelper
 {
 	/**
+	 * Indicates whether given string is written in snake case.
+	 *
+	 * @example CaseHelper::isSnake('snake_case') // true
+	 * @example CaseHelper::isSnake('camelCase') // false
+	 *
 	 * @param string $name
 	 * @return false|int
 	 */
@@ -27,6 +32,11 @@ class CaseHelper
 	}
 
 	/**
+	 * Indicates whether given string is written in snake case.
+	 *
+	 * @example CaseHelper::isCamel('camelCase') // true
+	 * @example CaseHelper::isCamel('snake_case') // false
+	 *
 	 * @param string $name
 	 * @return false|int
 	 */
@@ -36,6 +46,11 @@ class CaseHelper
 	}
 
 	/**
+	 * Converts camelCase string to snake_case
+	 *
+ 	 * @example CaseHelper::toSnake('camelCase') // camel_case
+	 * @example CaseHelper::toSnake('snake_case') // exception
+	 *
 	 * @param string $name
 	 * @return string
 	 * @throws \Exception
@@ -50,6 +65,11 @@ class CaseHelper
 	}
 
 	/**
+	 * Converts snake_case string to camelCase
+	 *
+	 * @example CaseHelper::camelCase('snake_case') // snakeCase
+	 * @example CaseHelper::camelCase('camelCase') // exception
+	 *
 	 * @param string $name
 	 * @return string
 	 * @throws \Exception
