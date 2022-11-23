@@ -108,7 +108,6 @@ trait Casegnostic
 		}
 
 		throw new \BadMethodCallException("Static method \"{$name}\" does not exist.");
-
 	}
 
 	/**

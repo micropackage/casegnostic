@@ -28,11 +28,7 @@ class CaseHelper
 	 */
 	public static function isSnake(string $name)
 	{
-		if (preg_match('/^[a-zA-Z0-9]+?(_[a-zA-Z0-9]+)+$/', $name)) {
-			return true;
-		}
-
-		return false;
+		return (bool)preg_match('/^[a-zA-Z0-9]+?(_[a-zA-Z0-9]+)+$/', $name);
 	}
 
 	/**
@@ -46,17 +42,13 @@ class CaseHelper
 	 */
 	public static function isCamel(string $name)
 	{
-		if (preg_match('/^[a-z]+([A-Z][a-z]+)+$/', $name)) {
-			return true;
-		}
-
-		return false;
+		return (bool)preg_match('/^[a-z]+([A-Z][a-z]+)+$/', $name);
 	}
 
 	/**
 	 * Converts camelCase string to snake_case
 	 *
- 	 * @example CaseHelper::toSnake('camelCase') // camel_case
+	 * @example CaseHelper::toSnake('camelCase') // camel_case
 	 * @example CaseHelper::toSnake('snake_case') // exception
 	 *
 	 * @param string $name
