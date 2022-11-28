@@ -1,10 +1,10 @@
 # Casegnostic
 
 [![BracketSpace Micropackage](https://img.shields.io/badge/BracketSpace-Micropackage-brightgreen)](https://bracketspace.com)
-[![Latest Stable Version](https://poser.pugx.org/micropackage/dochooks/v/stable)](https://packagist.org/packages/micropackage/dochooks)
-[![PHP from Packagist](https://img.shields.io/packagist/php-v/micropackage/dochooks.svg)](https://packagist.org/packages/micropackage/dochooks)
-[![Total Downloads](https://poser.pugx.org/micropackage/dochooks/downloads)](https://packagist.org/packages/micropackage/dochooks)
-[![License](https://poser.pugx.org/micropackage/dochooks/license)](https://packagist.org/packages/micropackage/dochooks)
+[![Latest Stable Version](https://poser.pugx.org/micropackage/casegnostic/v/stable)](https://packagist.org/packages/micropackage/casegnostic)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/micropackage/casegnostic.svg)](https://packagist.org/packages/micropackage/casegnostic)
+[![Total Downloads](https://poser.pugx.org/micropackage/casegnostic/downloads)](https://packagist.org/packages/micropackage/casegnostic)
+[![License](https://poser.pugx.org/micropackage/casegnostic/license)](https://packagist.org/packages/micropackage/casegnostic)
 
 <p align="center">
     <img src="https://bracketspace.com/extras/micropackage/micropackage-small.png" alt="Micropackage logo"/>
