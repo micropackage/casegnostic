@@ -48,26 +48,16 @@ trait Casegnostic
 	public function __set(string $name, $value)
 	{
 		if (CaseHelper::isSnake($name)) {
-			if (property_exists($this, CaseHelper::toCamel($name))) {
-				$this->{CaseHelper::toCamel($name)} = $value;
-			}
+			$this->{CaseHelper::toCamel($name)} = $value;
+		} else {
+			$this->{$name} = $value;
 		}
-
-		if (!CaseHelper::isCamel($name)) {
-			return;
-		}
-
-		if (!property_exists($this, CaseHelper::toSnake($name))) {
-			return;
-		}
-
-		$this->{CaseHelper::toSnake($name)} = $value;
 	}
 
 	/**
 	 * @param string $name
 	 * @param array<mixed> $arguments
-	 * @return mixed
+	 * @return mixed|void
 	 * @throws \Exception
 	 */
 	public function __call(string $name, array $arguments)
@@ -83,14 +73,12 @@ trait Casegnostic
 				return $this->{CaseHelper::toSnake($name)}(...$arguments);
 			}
 		}
-
-		throw new \BadMethodCallException("Method \"{$name}\" does not exist.");
 	}
 
 	/**
 	 * @param string $name
 	 * @param array<mixed> $arguments
-	 * @return mixed
+	 * @return mixed|void
 	 * @throws \Exception
 	 */
 	public static function __callStatic(string $name, array $arguments)
@@ -106,8 +94,6 @@ trait Casegnostic
 				return static::{CaseHelper::toSnake($name)}(...$arguments);
 			}
 		}
-
-		throw new \BadMethodCallException("Static method \"{$name}\" does not exist.");
 	}
 
 	/**
@@ -146,7 +132,5 @@ trait Casegnostic
 				unset($this->{CaseHelper::toSnake($name)});
 			}
 		}
-
-		throw new \InvalidArgumentException("Can't find value \"{$name}\" to unset.");
 	}
 }

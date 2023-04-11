@@ -22,14 +22,6 @@ $object = new class {
 	public static function camelCaseStaticMethodTwoArg(string $a, string $b): string { return $a . $b; }
 };
 
-test('call to undefined method throws exception', function() use ($object) {
-	return $object->undefinedMethod();
-})->throws(\BadMethodCallException::class);
-
-test('call to undefined static method throws exception', function() use ($object) {
-	return $object::undefinedStaticMethod();
-})->throws(\BadMethodCallException::class);
-
 test('unset ', function($property) {
 	unset($property);
 	expect(isset($property))->toBeFalsy();
