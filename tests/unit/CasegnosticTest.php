@@ -42,6 +42,7 @@ test('set ', function($property, $value) use ($object) {
 	$object->{$property} = $value;
 	expect($object->{$property})->toBe($value);
 })->with([
+	 'snake_case property by camelCase' => ['snakeCaseProperty', 5],
 	 'camelCase property by snake_case' => ['camel_case_property', 5],
 ]);
 
