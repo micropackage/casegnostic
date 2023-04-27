@@ -68,10 +68,12 @@ trait Casegnostic
 			}
 		}
 
-		if (CaseHelper::isCamel($name)) {
-			if (method_exists($this, CaseHelper::toSnake($name))) {
-				return $this->{CaseHelper::toSnake($name)}(...$arguments);
-			}
+		if (!CaseHelper::isCamel($name)) {
+			return;
+		}
+
+		if (method_exists($this, CaseHelper::toSnake($name))) {
+			return $this->{CaseHelper::toSnake($name)}(...$arguments);
 		}
 	}
 
@@ -89,10 +91,12 @@ trait Casegnostic
 			}
 		}
 
-		if (CaseHelper::isCamel($name)) {
-			if (method_exists(self::class, CaseHelper::toSnake($name))) {
-				return static::{CaseHelper::toSnake($name)}(...$arguments);
-			}
+		if (!CaseHelper::isCamel($name)) {
+			return;
+		}
+
+		if (method_exists(self::class, CaseHelper::toSnake($name))) {
+			return static::{CaseHelper::toSnake($name)}(...$arguments);
 		}
 	}
 
@@ -127,10 +131,14 @@ trait Casegnostic
 			}
 		}
 
-		if (CaseHelper::isCamel($name)) {
-			if (isset($this->{CaseHelper::toSnake($name)})) {
-				unset($this->{CaseHelper::toSnake($name)});
-			}
+		if (!CaseHelper::isCamel($name)) {
+			return;
 		}
+
+		if (!isset($this->{CaseHelper::toSnake($name)})) {
+			return;
+		}
+
+		unset($this->{CaseHelper::toSnake($name)});
 	}
 }
