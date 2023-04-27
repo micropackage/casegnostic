@@ -48,26 +48,16 @@ trait Casegnostic
 	public function __set(string $name, $value)
 	{
 		if (CaseHelper::isSnake($name)) {
-			if (property_exists($this, CaseHelper::toCamel($name))) {
-				$this->{CaseHelper::toCamel($name)} = $value;
-			}
+			$this->{CaseHelper::toCamel($name)} = $value;
+		} else {
+			$this->{$name} = $value;
 		}
-
-		if (!CaseHelper::isCamel($name)) {
-			return;
-		}
-
-		if (!property_exists($this, CaseHelper::toSnake($name))) {
-			return;
-		}
-
-		$this->{CaseHelper::toSnake($name)} = $value;
 	}
 
 	/**
 	 * @param string $name
 	 * @param array<mixed> $arguments
-	 * @return mixed
+	 * @return mixed|void
 	 * @throws \Exception
 	 */
 	public function __call(string $name, array $arguments)
@@ -78,19 +68,19 @@ trait Casegnostic
 			}
 		}
 
-		if (CaseHelper::isCamel($name)) {
-			if (method_exists($this, CaseHelper::toSnake($name))) {
-				return $this->{CaseHelper::toSnake($name)}(...$arguments);
-			}
+		if (!CaseHelper::isCamel($name)) {
+			return;
 		}
 
-		throw new \BadMethodCallException("Method \"{$name}\" does not exist.");
+		if (method_exists($this, CaseHelper::toSnake($name))) {
+			return $this->{CaseHelper::toSnake($name)}(...$arguments);
+		}
 	}
 
 	/**
 	 * @param string $name
 	 * @param array<mixed> $arguments
-	 * @return mixed
+	 * @return mixed|void
 	 * @throws \Exception
 	 */
 	public static function __callStatic(string $name, array $arguments)
@@ -101,13 +91,13 @@ trait Casegnostic
 			}
 		}
 
-		if (CaseHelper::isCamel($name)) {
-			if (method_exists(self::class, CaseHelper::toSnake($name))) {
-				return static::{CaseHelper::toSnake($name)}(...$arguments);
-			}
+		if (!CaseHelper::isCamel($name)) {
+			return;
 		}
 
-		throw new \BadMethodCallException("Static method \"{$name}\" does not exist.");
+		if (method_exists(self::class, CaseHelper::toSnake($name))) {
+			return static::{CaseHelper::toSnake($name)}(...$arguments);
+		}
 	}
 
 	/**
@@ -141,12 +131,14 @@ trait Casegnostic
 			}
 		}
 
-		if (CaseHelper::isCamel($name)) {
-			if (isset($this->{CaseHelper::toSnake($name)})) {
-				unset($this->{CaseHelper::toSnake($name)});
-			}
+		if (!CaseHelper::isCamel($name)) {
+			return;
 		}
 
-		throw new \InvalidArgumentException("Can't find value \"{$name}\" to unset.");
+		if (!isset($this->{CaseHelper::toSnake($name)})) {
+			return;
+		}
+
+		unset($this->{CaseHelper::toSnake($name)});
 	}
 }
